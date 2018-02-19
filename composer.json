@@ -1,0 +1,16 @@
+{
+  "name": "arivelox/pokermavens2",
+  "description": "PokerMavens2 API-Wrapper",
+  "keywords": ["poker mavens", "briggsoft"],
+  "type": "package",
+  "license": "MIT",
+  "authors": [{
+    "name": "Andre Matthies"
+  }],
+  "autoload": {
+    "psr-4": {
+      "Arivelox\\Pokermavens2\\": "src/"
+    },
+    "minimum-stability": "dev"
+  }
+}
