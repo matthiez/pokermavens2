@@ -4,12 +4,31 @@ use Arivelox\Pokermavens2\Exception\UnreachableException;
 use Arivelox\Pokermavens2\Exception\EmptyResponseException;
 use Arivelox\Pokermavens2\Exception\ApiException;
 
+/**
+ * Class Api
+ * @package Arivelox\Pokermavens2
+ */
 class Api
 {
+    /**
+     * @var
+     */
     protected $url;
+    /**
+     * @var
+     */
     protected $pw;
+    /**
+     * @var bool
+     */
     protected $verifyPeer;
 
+    /**
+     * Api constructor.
+     * @param $url
+     * @param $pw
+     * @param bool $verifyPeer
+     */
     public function __construct($url, $pw, $verifyPeer = true) {
         $this->url = $url;
         $this->pw = $pw;
@@ -18,8 +37,11 @@ class Api
 
     /**
      * @param $params
-     * @return mixed|object
-     * @throws \Exception
+     * @param bool $json
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function instance($params, $json = true) {
         $params['Password'] = $this->pw;
@@ -47,8 +69,10 @@ class Api
 
     /**
      * @param array $merge
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function accountsEdit($merge = []) {
         return $this->instance(array_merge([
@@ -58,8 +82,10 @@ class Api
 
     /**
      * @param array $merge
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function accountsGet($merge = []) {
         return $this->instance(array_merge([
@@ -69,8 +95,10 @@ class Api
 
     /**
      * @param array $merge
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function logsError($merge = []) {
         return $this->instance(array_merge([
@@ -80,8 +108,10 @@ class Api
 
     /**
      * @param array $merge
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function logsEvent($merge = []) {
         return $this->instance(array_merge([
@@ -91,8 +121,10 @@ class Api
 
     /**
      * @param array $merge
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function logsHandHistory($merge = []) {
         return $this->instance(array_merge([
@@ -101,9 +133,11 @@ class Api
     }
 
     /**
-     * @param $merge
-     * @return mixed
-     * @throws \Exception
+     * @param array $merge
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function ringGamesAdd($merge = []) {
         return $this->instance(array_merge([
@@ -114,7 +148,9 @@ class Api
     /**
      * @param $player
      * @return int
-     * @throws \Exception
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function getBalance($player) {
         $api = $this->accountsGet([
@@ -124,8 +160,10 @@ class Api
     }
 
     /**
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function getSystemStats() {
         return $this->instance(['Command' => "SystemStats"]);
@@ -133,8 +171,10 @@ class Api
 
     /**
      * @param $player
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function getPlayer($player) {
         return $this->accountsGet([
@@ -145,7 +185,9 @@ class Api
     /**
      * @param $player
      * @return bool
-     * @throws \Exception
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function isPlayer($player) {
         $api = $this->accountsGet([
@@ -157,7 +199,9 @@ class Api
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function getChipLeaders() {
         $api = $this->instance(['Command' => "AccountsList", "Fields" => "Player,Balance"]);
@@ -171,7 +215,9 @@ class Api
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function getTourneyResults() {
         $data = [];
@@ -186,7 +232,9 @@ class Api
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function getErrorLogs() {
         $arr = [];
@@ -200,7 +248,9 @@ class Api
     /**
      * @param $edate
      * @return string
-     * @throws \Exception
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function getErrorLog($edate) {
         $str = '';
@@ -213,7 +263,9 @@ class Api
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function getEventLogs() {
         $arr = [];
@@ -227,7 +279,9 @@ class Api
     /**
      * @param $date
      * @return array
-     * @throws \Exception
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function getEventLog($date) {
         $arr = [];
@@ -240,7 +294,9 @@ class Api
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function getHandHistories() {
         $arr = [];
@@ -254,7 +310,9 @@ class Api
     /**
      * @param $history
      * @return array
-     * @throws \Exception
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function getHandHistory($history) {
         $handHistory = [];
@@ -270,8 +328,10 @@ class Api
     /**
      * @param $player
      * @param $avatar
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function setAvatar($player, $avatar) {
         return $this->accountsEdit([
@@ -283,8 +343,10 @@ class Api
     /**
      * @param $player
      * @param $location
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function setLocation($player, $location) {
         return $this->accountsEdit([
@@ -296,8 +358,10 @@ class Api
     /**
      * @param $player
      * @param $email
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function setEmail($player, $email) {
         return $this->accountsEdit([
@@ -309,8 +373,10 @@ class Api
     /**
      * @param $player
      * @param $avatarFile
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function setCustomAvatar($player, $avatarFile) {
         return $this->accountsEdit([
@@ -322,8 +388,10 @@ class Api
 
     /**
      * @param $name
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function ringGamesOnline($name) {
         return $this->instance([
@@ -334,8 +402,10 @@ class Api
 
     /**
      * @param $name
-     * @return mixed|object
-     * @throws \Exception
+     * @return object
+     * @throws ApiException
+     * @throws EmptyResponseException
+     * @throws UnreachableException
      */
     public function ringGamesOffline($name) {
         return $this->instance([
