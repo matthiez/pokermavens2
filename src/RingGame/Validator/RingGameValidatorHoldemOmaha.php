@@ -3,6 +3,9 @@
 use Arivelox\Pokermavens2\RingGame\RingGame;
 
 class RingGameValidatorHoldemOmaha extends RingGameValidator {
+    /**
+     *
+     */
     public const GAME_TYPES = [
         "Limit Hold'em",
         "Pot Limit Hold'em",
@@ -15,8 +18,16 @@ class RingGameValidatorHoldemOmaha extends RingGameValidator {
         "No Limit Omaha Hi-Lo"
     ];
 
+    /**
+     *
+     */
     public const MAX_SEATS = 10;
 
+    /**
+     * RingGameValidatorHoldemOmaha constructor.
+     * @param RingGame $game
+     * @param string $placeholder
+     */
     public function __construct(RingGame $game, $placeholder = 'Blind') {
         parent::__construct($game);
 

@@ -4,21 +4,61 @@ use Arivelox\Pokermavens2\RingGame\RingGame;
 
 class RingGameValidator
 {
+    /**
+     *
+     */
     public const MIN_SEATS = 2;
+    /**
+     *
+     */
     public const MAX_TABLE_NAME_LENGTH = 25;
+    /**
+     *
+     */
     public const BB_MIN = 1;
+    /**
+     *
+     */
     public const BB_MAX = 10000;
+    /**
+     *
+     */
     public const SB_MIN = 1;
+    /**
+     *
+     */
     public const SB_MAX = 5000;
+    /**
+     *
+     */
     public const BUYIN_MIN = 10;
+    /**
+     *
+     */
     public const BUYIN_MAX = 1000000;
 
+    /**
+     * @var RingGame
+     */
     protected $game;
 
+    /**
+     * @var
+     */
     public $gameTypes;
+    /**
+     * @var
+     */
     public $maxSeats;
+    /**
+     * @var
+     */
     public $placeholder;
 
+    /**
+     * RingGameValidator constructor.
+     * @param RingGame $game
+     */
     public function __construct(RingGame $game) {
         $this->game = $game;
     }

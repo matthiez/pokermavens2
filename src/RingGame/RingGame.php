@@ -5,29 +5,82 @@ use Arivelox\Pokermavens2\RingGame\Validator\RingGameValidator;
 
 class RingGame
 {
+    /**
+     * @var Api
+     */
     private $api;
 
+    /**
+     * @var
+     */
     public $buyInMax;
+    /**
+     * @var
+     */
     public $buyInMin;
+    /**
+     * @var
+     */
     public $buyInDef;
+    /**
+     * @var
+     */
     public $rakePercentage;
+    /**
+     * @var
+     */
     public $BB;
+    /**
+     * @var
+     */
     public $SB;
+    /**
+     * @var
+     */
     public $PW;
+    /**
+     * @var
+     */
     public $name;
+    /**
+     * @var
+     */
     public $private;
+    /**
+     * @var
+     */
     public $seats;
+    /**
+     * @var
+     */
     public $game;
+    /**
+     * @var
+     */
     public $dupeIPs;
+    /**
+     * @var
+     */
     public $ante;
+    /**
+     * @var
+     */
     public $bringIn;
 
+    /**
+     * RingGame constructor.
+     * @param Api $api
+     * @param $opts
+     */
     public function __construct(Api $api, $opts) {
         $this->api = $api;
 
         $this->set($opts);
     }
 
+    /**
+     * @param $opts
+     */
     private function set($opts) {
         $this->bringIn = $opts->bringIn;
         $this->name = $opts->name;
@@ -46,18 +99,13 @@ class RingGame
     }
 
     /**
-     * @param $name
-     * @param $game
-     * @param $seats
-     * @param $sb
-     * @param $bb
-     * @param $minBuyIn
-     * @param $maxBuyIn
-     * @param $pw
-     * @param bool $private
-     * @param bool $dupe
-     * @return mixed|object
-     * @throws \Exception
+     * @param bool $validate
+     * @param array $merge
+     * @return object
+     * @throws \Arivelox\Pokermavens2\Exception\ApiException
+     * @throws \Arivelox\Pokermavens2\Exception\EmptyResponseException
+     * @throws \Arivelox\Pokermavens2\Exception\UnreachableException
+     * @throws \ReflectionException
      */
     public function create($validate = true, $merge = []) {
         $className = (new \ReflectionClass($this))->getShortName();
@@ -84,6 +132,9 @@ class RingGame
         ], $merge));
     }
 
+    /**
+     *
+     */
     protected function validate() {
         new RingGameValidator($this);
     }
