@@ -21,7 +21,7 @@ class Api
      * @return mixed|object
      * @throws \Exception
      */
-    public function api($params, $json = true) {
+    public function instance($params, $json = true) {
         $params['Password'] = $this->pw;
         $params['JSON'] = $json ? 'Yes' : 'No';
         $curl = curl_init($this->url);
@@ -51,7 +51,7 @@ class Api
      * @throws \Exception
      */
     public function accountsEdit($merge = []) {
-        return $this->api(array_merge([
+        return $this->instance(array_merge([
             'Command' => 'AccountsEdit'
         ], $merge));
     }
@@ -62,7 +62,7 @@ class Api
      * @throws \Exception
      */
     public function accountsGet($merge = []) {
-        return $this->api(array_merge([
+        return $this->instance(array_merge([
             'Command' => 'AccountsGet'
         ], $merge));
     }
@@ -73,7 +73,7 @@ class Api
      * @throws \Exception
      */
     public function logsError($merge = []) {
-        return $this->api(array_merge([
+        return $this->instance(array_merge([
             'Command' => 'LogsError'
         ], $merge));
     }
@@ -84,7 +84,7 @@ class Api
      * @throws \Exception
      */
     public function logsEvent($merge = []) {
-        return $this->api(array_merge([
+        return $this->instance(array_merge([
             'Command' => 'LogsEvent'
         ], $merge));
     }
@@ -95,7 +95,7 @@ class Api
      * @throws \Exception
      */
     public function logsHandHistory($merge = []) {
-        return $this->api(array_merge([
+        return $this->instance(array_merge([
             'Command' => 'LogsHandHistory'
         ], $merge));
     }
@@ -106,7 +106,7 @@ class Api
      * @throws \Exception
      */
     public function ringGamesAdd($merge = []) {
-        return $this->api(array_merge([
+        return $this->instance(array_merge([
             'Command' => 'RingGamesAdd'
         ], $merge));
     }
@@ -128,7 +128,7 @@ class Api
      * @throws \Exception
      */
     public function getSystemStats() {
-        return $this->api(['Command' => "SystemStats"]);
+        return $this->instance(['Command' => "SystemStats"]);
     }
 
     /**
@@ -160,7 +160,7 @@ class Api
      * @throws \Exception
      */
     public function getChipLeaders() {
-        $api = $this->api(['Command' => "AccountsList", "Fields" => "Player,Balance"]);
+        $api = $this->instance(['Command' => "AccountsList", "Fields" => "Player,Balance"]);
         $data = [];
         if (isset($api->Accounts)) {
             for ($i = 0; $i < $api->Accounts; $i++) $data[$api->Player[$i]] = $api->Balance[$i];
@@ -175,7 +175,7 @@ class Api
      */
     public function getTourneyResults() {
         $data = [];
-        $api = $this->api(['Command' => "TournamentsResults"]);
+        $api = $this->instance(['Command' => "TournamentsResults"]);
         if (isset($api->Files)) {
             $data['total'] = $api->Files;
             $data['options'] = [];
@@ -326,7 +326,7 @@ class Api
      * @throws \Exception
      */
     public function ringGamesOnline($name) {
-        return $this->api([
+        return $this->instance([
             'Command' => 'RingGamesOnline',
             'Name' => $name
         ]);
@@ -338,7 +338,7 @@ class Api
      * @throws \Exception
      */
     public function ringGamesOffline($name) {
-        return $this->api([
+        return $this->instance([
             'Command' => 'RingGamesOffline',
             'Name' => $name
         ]);
