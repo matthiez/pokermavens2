@@ -1,78 +1,46 @@
 <?php namespace Arivelox\Pokermavens2\RingGame;
 
-use Arivelox\Pokermavens2\Api;
+use Arivelox\Pokermavens2\Api\RingGames;
 use Arivelox\Pokermavens2\RingGame\Validator\RingGameValidator;
 
 class RingGame
 {
-    /**
-     * @var Api
-     */
     private $api;
 
-    /**
-     * @var
-     */
     public $buyInMax;
-    /**
-     * @var
-     */
+
     public $buyInMin;
-    /**
-     * @var
-     */
+
     public $buyInDef;
-    /**
-     * @var
-     */
+
     public $rakePercentage;
-    /**
-     * @var
-     */
+
     public $BB;
-    /**
-     * @var
-     */
+
     public $SB;
-    /**
-     * @var
-     */
+
     public $PW;
-    /**
-     * @var
-     */
+
     public $name;
-    /**
-     * @var
-     */
+
     public $private;
-    /**
-     * @var
-     */
+
     public $seats;
-    /**
-     * @var
-     */
+
     public $game;
-    /**
-     * @var
-     */
+
     public $dupeIPs;
-    /**
-     * @var
-     */
+
     public $ante;
-    /**
-     * @var
-     */
+
     public $bringIn;
 
     /**
      * RingGame constructor.
-     * @param Api $api
+     * @param RingGames $api
      * @param $opts
      */
-    public function __construct(Api $api, $opts) {
+    public function __construct(RingGames $api, $opts) {
         $this->api = $api;
 
         $this->set($opts);
@@ -101,10 +69,7 @@ class RingGame
     /**
      * @param bool $validate
      * @param array $merge
-     * @return object
-     * @throws \Arivelox\Pokermavens2\Exception\ApiException
-     * @throws \Arivelox\Pokermavens2\Exception\EmptyResponseException
-     * @throws \Arivelox\Pokermavens2\Exception\UnreachableException
+     * @return \Arivelox\Pokermavens2\Api\Response
      * @throws \ReflectionException
      */
     public function create($validate = true, $merge = []) {
@@ -114,7 +79,7 @@ class RingGame
             $Validator = __NAMESPACE__."\\Validator\\RingGameValidator$className";
             (new $Validator($this))->validate();
         }
-        return $this->api->ringGamesAdd(array_merge([
+        return $this->api->add(array_merge([
             'Name' => $this->name,
             'Game' => $this->game,
             'PW' => $this->PW,

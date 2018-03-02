@@ -1,14 +1,14 @@
 <?php namespace Arivelox\Pokermavens2\RingGame;
 
-use Arivelox\Pokermavens2\Api;
+use Arivelox\Pokermavens2\Api\RingGames;
 
 class RazzStud extends RingGame {
     /**
      * RazzStud constructor.
-     * @param Api $api
+     * @param RingGames $api
      * @param $opts
      */
-    public function __construct(Api $api, $opts) {
+    public function __construct(RingGames $api, $opts) {
         parent::__construct($api, (object)$opts);
     }
 }
