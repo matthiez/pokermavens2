@@ -2,7 +2,8 @@
 
 use Arivelox\Pokermavens2\Api\RingGames;
 
-class RazzStud extends RingGame {
+class RazzStud extends RingGame
+{
     /**
      * RazzStud constructor.
      * @param RingGames $api

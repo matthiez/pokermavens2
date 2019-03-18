@@ -2,7 +2,8 @@
 
 use Arivelox\Pokermavens2\RingGame\RingGame;
 
-class RingGameValidatorHoldemOmaha extends RingGameValidator {
+class RingGameValidatorHoldemOmaha extends RingGameValidator
+{
     /**
      *
      */

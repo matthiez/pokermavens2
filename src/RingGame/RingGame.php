@@ -60,7 +60,7 @@ class RingGame
         $this->SB = $opts->SB;
         $this->BB = $opts->BB;
         $this->ante = (float)$opts->ante;
-        if (isset($opts->PW))$this->PW = (string)$opts->PW;
+        if (isset($opts->PW)) $this->PW = (string)$opts->PW;
         $this->private = (bool)$this->private ? 'Yes' : 'No';
         $this->dupeIPs = (bool)$opts->dupeIPs ? 'Yes' : 'No';
         $this->rakePercentage = isset($opts->rakePercentage) ? (float)$opts->rakePercentage : 0;
@@ -76,7 +76,7 @@ class RingGame
         $className = (new \ReflectionClass($this))->getShortName();
         $isHoldemOmaha = $className === 'HoldemOmaha';
         if ($validate) {
-            $Validator = __NAMESPACE__."\\Validator\\RingGameValidator$className";
+            $Validator = __NAMESPACE__ . "\\Validator\\RingGameValidator$className";
             (new $Validator($this))->validate();
         }
         return $this->api->add(array_merge([

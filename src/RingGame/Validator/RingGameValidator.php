@@ -2,20 +2,27 @@
 
 use Arivelox\Pokermavens2\RingGame\RingGame;
 
+/**
+ * Class RingGameValidator
+ * @package Arivelox\Pokermavens2\RingGame\Validator
+ */
 class RingGameValidator
 {
     /**
      *
      */
     public const MIN_SEATS = 2;
+
     /**
      *
      */
     public const MAX_TABLE_NAME_LENGTH = 25;
+
     /**
      *
      */
     public const BB_MIN = 1;
+
     /**
      *
      */

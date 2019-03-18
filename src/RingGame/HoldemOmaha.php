@@ -2,7 +2,8 @@
 
 use Arivelox\Pokermavens2\Api\RingGames;
 
-class HoldemOmaha extends RingGame {
+class HoldemOmaha extends RingGame
+{
 
     /**
      * HoldemOmaha constructor.
