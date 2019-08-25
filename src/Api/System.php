@@ -1,4 +1,7 @@
-<?php namespace Arivelox\Pokermavens2\Api;
+<?php
+declare(strict_types=1);
+
+namespace Arivelox\Pokermavens2\Api;
 
 class System
 {

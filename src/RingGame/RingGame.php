@@ -1,7 +1,14 @@
-<?php namespace Arivelox\Pokermavens2\RingGame;
+<?php
+declare(strict_types=1);
+
+namespace Arivelox\Pokermavens2\RingGame;
 
 use Arivelox\Pokermavens2\Api\RingGames;
 use Arivelox\Pokermavens2\RingGame\Validator\RingGameValidator;
+use Arivelox\Pokermavens2\RingGame\Validator\RingGameValidatorHoldemOmaha;
+use Arivelox\Pokermavens2\RingGame\Validator\RingGameValidatorRazzStud;
+use ReflectionClass;
+use ReflectionException;
 
 class RingGame
 {
@@ -35,50 +42,59 @@ class RingGame
 
     public $bringIn;
 
-    /**
-     * RingGame constructor.
-     * @param RingGames $api
-     * @param $opts
-     */
     public function __construct(RingGames $api, $opts) {
         $this->api = $api;
 
         $this->set($opts);
     }
 
-    /**
-     * @param $opts
-     */
     private function set($opts) {
         $this->bringIn = $opts->bringIn;
+
         $this->name = $opts->name;
+
         $this->game = $opts->game;
+
         $this->seats = $opts->seats;
+
         $this->buyInMin = $opts->buyInMin;
+
         $this->buyInMax = $opts->buyInMax;
+
         $this->buyInDef = isset($opts->buyInDef) ? $opts->buyInDef : $opts->buyInMax / 2;
+
         $this->SB = $opts->SB;
+
         $this->BB = $opts->BB;
+
         $this->ante = (float)$opts->ante;
-        if (isset($opts->PW)) $this->PW = (string)$opts->PW;
+
+        if (isset($opts->PW)) {
+            $this->PW = (string)$opts->PW;
+        }
+
         $this->private = (bool)$this->private ? 'Yes' : 'No';
+
         $this->dupeIPs = (bool)$opts->dupeIPs ? 'Yes' : 'No';
+
         $this->rakePercentage = isset($opts->rakePercentage) ? (float)$opts->rakePercentage : 0;
     }
 
-    /**
-     * @param bool $validate
-     * @param array $merge
-     * @return \Arivelox\Pokermavens2\Api\Response
-     * @throws \ReflectionException
-     */
-    public function create($validate = true, $merge = []) {
-        $className = (new \ReflectionClass($this))->getShortName();
-        $isHoldemOmaha = $className === 'HoldemOmaha';
+    /** @throws ReflectionException */
+    public function create(bool $validate = true, array $merge = []) {
+        $className = (new ReflectionClass($this))->getShortName();
+
+        $isHoldemOmaha = $className == 'HoldemOmaha';
+
         if ($validate) {
             $Validator = __NAMESPACE__ . "\\Validator\\RingGameValidator$className";
-            (new $Validator($this))->validate();
+
+            $validator = new $Validator($this);
+
+            /** @var RingGameValidatorHoldemOmaha|RingGameValidatorRazzStud $validator */
+            $validator->validate();
         }
+
         return $this->api->add(array_merge([
             'Name' => $this->name,
             'Game' => $this->game,
@@ -97,10 +113,7 @@ class RingGame
         ], $merge));
     }
 
-    /**
-     *
-     */
-    protected function validate() {
+    protected function validate(): void {
         new RingGameValidator($this);
     }
 }

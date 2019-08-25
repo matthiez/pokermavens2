@@ -1,15 +1,12 @@
-<?php namespace Arivelox\Pokermavens2\RingGame;
+<?php
+declare(strict_types=1);
+
+namespace Arivelox\Pokermavens2\RingGame;
 
 use Arivelox\Pokermavens2\Api\RingGames;
 
 class HoldemOmaha extends RingGame
 {
-
-    /**
-     * HoldemOmaha constructor.
-     * @param RingGames $api
-     * @param $opts
-     */
     public function __construct(RingGames $api, $opts) {
         parent::__construct($api, (object)$opts);
     }

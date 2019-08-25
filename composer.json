@@ -1,21 +1,25 @@
 {
   "name": "arivelox/pokermavens2",
   "description": "PokerMavens2 API-Wrapper",
-  "keywords": ["poker mavens", "briggsoft"],
+  "keywords": [
+    "poker mavens",
+    "briggsoft"
+  ],
   "type": "package",
   "license": "MIT",
-  "authors": [{
-    "name": "Andre Matthies"
-  }],
+  "authors": [
+    {
+      "name": "Andre Matthies"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Arivelox\\Pokermavens2\\": "src/"
     }
   },
   "require": {
-    "php": "~7.1"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "7"
+    "php": "~7.1",
+    "ext-curl": "*",
+    "ext-json": "*"
   }
 }

@@ -1,4 +1,7 @@
-<?php namespace Arivelox\Pokermavens2\Api;
+<?php
+declare(strict_types=1);
+
+namespace Arivelox\Pokermavens2\Api;
 
 class Accounts
 {
@@ -8,56 +11,63 @@ class Accounts
 
     public function __construct(Api $api) {
         $this->api = $api;
+
         $this->api->prefix = self::PREFIX;
     }
 
-    public function get($merge = []) {
+    public function get(array $merge = []) {
         return $this->api->command('Get', $merge);
     }
 
-    public function set($merge = []) {
+    public function set(array $merge = []) {
         return $this->api->command('Edit', $merge);
     }
 
-    public function getBalance($player) {
+    public function getBalance(string $player) {
         $api = $this->get([
             'Player' => $player
         ]);
         return (int)$api->Balance;
     }
 
-    public function getChipLeaders() {
+    public function getChipLeaders(): array {
         $api = $this->api->instance(['Command' => "AccountsList", "Fields" => "Player,Balance"]);
+
         $data = [];
+
         if (isset($api->Accounts) && isset($api->Player) && isset($api->Balance)) {
-            for ($i = 0; $i < $api->Accounts; $i++) $data[$api->Player[$i]] = $api->Balance[$i];
+            for ($i = 0; $i < $api->Accounts; $i++) {
+                $data[$api->Player[$i]] = $api->Balance[$i];
+            }
+
             arsort($data);
         }
+
         return $data;
     }
 
-    public function getPlayer($player) {
+    public function getPlayer(string $player) {
         return $this->get([
             'Player' => $player
         ]);
     }
 
-    public function isPlayer($player) {
+    public function isPlayer(string $player) {
         $api = $this->get([
             'Player' => $player
         ]);
 
-        return isset($api->Error) && $api->Error === 'Unknown account' ? false : true;
+        return isset($api->Error) && $api->Error == 'Unknown account' ? false : true;
     }
 
-    public function setAvatar($player, $avatar) {
+    public function setAvatar(string $player, int $avatar) {
         return $this->set([
             'Player' => $player,
             'Avatar' => $avatar
         ]);
     }
 
-    public function setAvatarCustom($player, $avatarFile) {
+    public function setAvatarCustom(string $player, string $avatarFile) {
         return $this->set([
             'Player' => $player,
             'AvatarFile' => $avatarFile,
@@ -65,14 +75,14 @@ class Accounts
         ]);
     }
 
-    public function setEmail($player, $email) {
+    public function setEmail(string $player, string $email) {
         return $this->set([
             'Player' => $player,
             'Email' => $email
         ]);
     }
 
-    public function setLocation($player, $location) {
+    public function setLocation(string $player, string $location) {
         return $this->set([
             'Player' => $player,
             'Location' => $location
