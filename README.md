@@ -1,6 +1,6 @@
 A simple PHP wrapper for Pokermavens2 from Briggs Softworks.
 
-#Installation
+# Installation
 1. Add to composer.json:  
 ```json
         "repositories": [
@@ -12,6 +12,6 @@ A simple PHP wrapper for Pokermavens2 from Briggs Softworks.
 ```
 2. Run ```composer update``` in terminal.
 
-##TODO: 
+## TODO: 
 1. Add remaining API methods.
 2. Add tests.
